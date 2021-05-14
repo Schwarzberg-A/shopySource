@@ -1,0 +1,57 @@
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: .8em;
+}
+
+
+body, html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+p {
+  margin: 0;
+}
+button:hover, button:focus {
+  outline: none;
+  box-shadow: 0 0 5px gray;
+}
+
+button:active {
+  box-shadow: 0 0 0 gray;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  background-color: inherit;
+  border-radius: 5px;
+  border: 1px solid #DDDDDD;
+  color: #555555;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0
+}
+
+.dropdown-menu {
+  margin-bottom: 50px;
+}

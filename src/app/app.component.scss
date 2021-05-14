@@ -1,0 +1,55 @@
+// body {
+//   background-color: rgb(224, 120, 50);
+// }
+:host {
+  display: inline-block;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  // padding-left: 410px;
+  padding-left: 140px;
+  padding-right: 140px;
+  padding-bottom: 75px;
+  padding-top: 150px;
+}
+.head {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100px;
+  width: 100vw;
+  padding-left: 55px;
+  padding-right: 55px;
+  background-image: linear-gradient( to left, #2980B9, #6DD5FA, #FFFFFF)
+}
+.head__cart {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../assets/pictures/cart.png)
+}
+
+
+
+
+.side-bar {
+  position: fixed;
+  z-index: 2;
+  padding: 20px;
+  left: 5px;
+  top: 100px;
+  width: 350px;
+  height: 100vh;
+  background-color: rgb(215,215,215);
+}
+::ng-deep .toggled .toggleBtn  button{
+  box-shadow: 0 0 10px blue;
+}
+
+
