@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { toggles, Toggles } from './others/toggles';
 import { CartService } from './servises/cart.service';
+import { Store, select } from '@ngrx/store';
+import * as fromApp from './store/reducers';
+import { User } from './store/reducers/user.reducers';
+import { UserSelectors } from './store/selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +18,7 @@ import { CartService } from './servises/cart.service';
       <li class="nav-bar__item search"><app-search></app-search></li>
       <li class="nav-bar__item favorite"><a class="nav-bar__link " routerLink="/favorite"><img width='30px' src="../../assets/pictures/favorite+.svg"></a></li>
       <li class="nav-bar__item head__cart-wrapp">
-        
+
         <div class="head__cart" (click)="cartService.togglePopup()">
           <div *ngIf="cartService.count" class="numberOfPurchases">
             {{cartService.count}}
@@ -21,7 +26,21 @@ import { CartService } from './servises/cart.service';
         </div>
         <app-popup-cart (popclosed)="cartService.close()"></app-popup-cart>
       </li>
-      <li class="nav-bar__item profile"><a class="nav-bar__link" routerLink="/profile"><img class='profile__img' src="../assets/pictures/profile.png">Личный кабинет</a></li>
+      <li class="nav-bar__item profile">
+        <a class="nav-bar__link" routerLink="/profile">
+          <img class='profile__img' src="../assets/pictures/profile.png">
+        </a>
+        <div>
+          <a class="nav-bar__link" routerLink="/profile">
+            Личный кабинет
+          </a>
+          <div class="hello" *ngIf="user$ | async as user">
+            <span  *ngIf="user.login">
+              hello, Mr. {{user.login}}
+            </span>
+          </div>
+        </div>
+      </li>
     </ul>
   </nav>
 </div>
@@ -80,6 +99,9 @@ import { CartService } from './servises/cart.service';
   font-size: 1.6em;
 }
 
+.hello {
+  color: white;
+}
 
 .favorite {
   margin-bottom: -5px;
@@ -89,13 +111,19 @@ import { CartService } from './servises/cart.service';
   margin-left: auto;
 }
 
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile a{
   color: white;
   font-size: 1.2em;
 }
 .profile__img {
   width:30px;
-  margin-bottom: -7px;
+  /* margin-bottom: -7px; */
   margin-right: 7px;
 }
   `]
@@ -103,10 +131,12 @@ import { CartService } from './servises/cart.service';
 export class NavbarComponent implements OnInit {
   toggles: Toggles[] = toggles
   popupIsOpen: boolean = this.cartService.popupIsOpen
-
-  constructor( public cartService: CartService) { }
+  user$: Observable<User> = this.store.pipe(select(UserSelectors.selectUserState))
+  // user: any = null
+  constructor( public cartService: CartService, private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+    // this.user$.subscribe(resp => this.user = resp)
   }
 
 }

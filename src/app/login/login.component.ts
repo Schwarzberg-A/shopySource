@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { logInsuccess } from '../store/actions/user.action';
+import * as fromUser from '../store/reducers/user.reducers';
 
 @Component({
   selector: 'app-login',
   template: `
-    <div class='login-wrapp'>
-      <input class='login-item input' type='text' name='login' placeholder='login'>
-      <input class='login-item input' type='text' name='password' placeholder='password'>
+    <form [formGroup]="logInForm" class='login-wrapp' (ngSubmit)="logIn()">
+      <input class='login-item input' formControlName='login' type='text' name='login' placeholder='login'>
+      <input class='login-item input'  formControlName='password' type='text' name='password' placeholder='password'>
       <button class='login-item btn'>войти</button>
       <a class='login-item' routerLink="/sign-in">зарегистироваться</a>
-    </div>
+    </form>
   `,
   styles: [`
     :host {
-      display: flex; 
+      display: flex;
       height: 100%;
       flex-wrapp: wrapp;
     }
@@ -37,8 +40,16 @@ import { Router } from '@angular/router';
   `]
 })
 export class LoginComponent implements OnInit {
+  logInForm: FormGroup = this.fb.group({
+    login: '',
+    password: '',
+  })
 
-  constructor(private router: Router) { }
+  logIn() {
+    this.store.dispatch(logInsuccess({ user: this.logInForm.value }))
+  }
+
+  constructor(private store: Store<fromUser.User>, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }

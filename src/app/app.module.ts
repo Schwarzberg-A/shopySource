@@ -39,7 +39,10 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NavbarComponent } from './navbar.component';
 import { NgxErrorModule } from './ngx-error/ngx-error.module';
-
+import { StoreModule } from '@ngrx/store';
+import * as fromUser from './store/reducers/user.reducers'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -83,6 +86,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     HttpClientModule,
     FormsModule,
     NgxErrorModule,
+    StoreModule.forRoot({user: fromUser.reducer}),
+    StoreDevtoolsModule.instrument({
+      name: "NgRx Store",
+      logOnly: environment.production
+    }),
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ru' }, { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons }],
   bootstrap: [AppComponent]

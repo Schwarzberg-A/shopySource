@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxErrorModule } from '../ngx-error/ngx-error.module';
-import { PasswordMatchDirective } from './diretives/password-match.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [PasswordMatchDirective],
+  declarations: [],
   imports: [
     CommonModule,
-    NgxErrorModule
+    NgxErrorModule,
+    ReactiveFormsModule,
   ]
 })
 export class SignInModule { }
